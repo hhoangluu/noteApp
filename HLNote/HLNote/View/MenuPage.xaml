@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage Title="HLNote"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HLNote.MenuPage"
+             xmlns:local ="clr-namespace:HLNote"
+             IsPresented="False" NavigationPage.HasNavigationBar="True">
+    <MasterDetailPage.Master>
+        <ContentPage Title="Main menu">
+            <StackLayout>
+                <Button Text="Notes"  Image="note.png" Clicked="GoHome"
+                        BorderRadius="20" Margin="0" BackgroundColor="White" MinimumHeightRequest="50"></Button>
+                <Button Text="Genre Manager" Image="manager.png" Clicked="GoGenre"
+                        BorderRadius="20" Margin="0" BackgroundColor="White" MinimumHeightRequest="50"></Button>
+                <Button Text="Feed Back" Image="feedback.png" Clicked="GoFeedBack"
+                        BorderRadius="20" Margin="0" BackgroundColor="White" MinimumHeightRequest="50"></Button>
+                <Label Text="Genre" HorizontalOptions="Center" FontSize="Medium" FontAttributes="Bold"></Label>
+                <ListView x:Name="listMenu" ItemSelected="OnItemSelected">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal" Padding="3">
+                                    <Label Text="{Binding GenreName}" x:Name="genreName"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </ContentPage>
+    </MasterDetailPage.Master>
+    <MasterDetailPage.Detail>
+        <NavigationPage>
+            <x:Arguments>
+                <local:HomePage></local:HomePage>
+                <!--<NavigationPage.TitleIcon>
+                    <Image Source="logo.png" HeightRequest="32" WidthRequest="21"></Image>
+                    --><!--<Label Text="HLNote" FontAttributes="Bold"></Label>--><!--
+                </NavigationPage.TitleIcon>-->
+            </x:Arguments>
+           
+        </NavigationPage>
+    </MasterDetailPage.Detail>
+</MasterDetailPage>

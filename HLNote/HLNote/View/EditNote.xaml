@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HLNote.EditNote"
+             Title="Edit Note">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <ScrollView Grid.Row="0">
+            <AbsoluteLayout>
+                <StackLayout AbsoluteLayout.LayoutBounds="0.5,0.1,0.9,1" AbsoluteLayout.LayoutFlags="All">
+                    <StackLayout AbsoluteLayout.LayoutBounds="0,0,0,0" AbsoluteLayout.LayoutFlags="All">
+                        <Picker x:Name="genre" 
+                                HeightRequest="40" FontSize="20" Margin="0,20,0,0"
+                                Title="--Select Genre--" SelectedIndexChanged="OnSelectGenre"
+                                ItemDisplayBinding="{Binding GenreName}"/>
+                        <!--<Label Text="hello" x:Name="genre" BackgroundColor="Pink" HeightRequest="40" FontSize="20" Margin="0,20,0,0"/>-->
+                        <Grid x:Name="imgGrid" />
+                    </StackLayout>
+                    <StackLayout>
+                        <ScrollView>
+                            <Editor Placeholder="Title" AutoSize="TextChanges" BackgroundColor="White"
+                                x:Name="titleEditor"/>
+                        </ScrollView>
+                        <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                            <Editor x:Name="contentEditor" Placeholder="Content..."
+                                    AutoSize="TextChanges" HeightRequest="200"/>
+                        </ScrollView>
+                    </StackLayout>
+                </StackLayout>
+            </AbsoluteLayout>
+        </ScrollView>
+        <Image x:Name="ZoomImage" IsVisible="False" HorizontalOptions="Fill" >
+            <Image.GestureRecognizers>
+                <!--<TapGestureRecognizer Tapped="TapRomImage"></TapGestureRecognizer>-->
+                <TapGestureRecognizer Tapped="TapZoomImage"/>
+                <SwipeGestureRecognizer Direction="Left" Swiped="OnSwiped"/>
+                <SwipeGestureRecognizer Direction="Right" Swiped="OnSwiped"/>
+            </Image.GestureRecognizers>
+        </Image>
+        <Button Grid.Row="1" Image="save.png"
+                Margin="50,0,50,5" x:Name="saveBtn" BackgroundColor="White"
+                BorderRadius="50" Clicked="SaveBtn_Clicked" 
+                HeightRequest="50" VerticalOptions="FillAndExpand">
+        </Button>
+        
+        <ListView x:Name="ListColor" Grid.RowSpan="3" Margin="50,200,50,50"
+                  BackgroundColor="White"
+                  IsVisible="False" ItemSelected="ChooseColor">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                            <!--<Label Text="{Binding ColorName}" ></Label>-->
+                            <BoxView
+                                BackgroundColor="{Binding ColorName}"  
+                                ></BoxView>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackLayout Orientation="Horizontal" Grid.Row="2" HorizontalOptions="Center" VerticalOptions="Center">
+            <Button x:Name="btnAddImage" Clicked="BtnAddImage_Clicked" 
+                Grid.Row="2" BorderRadius="50" Image="image.png"
+                BackgroundColor="White"></Button>
+            <Button x:Name="btnPassword" Clicked="AddPassword"
+                Grid.Row="2" Image="password.png" BackgroundColor="#fcfcf8"
+                BorderRadius="50" ></Button>
+            <Button x:Name="btnColor" Clicked="BtnColor_Clicked" 
+                Grid.Row="2" Image="color.png" BackgroundColor="#fcfcf8"
+                BorderRadius="50"></Button>
+        </StackLayout>
+    </Grid>
+
+    <!--<AbsoluteLayout>
+        <Label x:Name="genre"
+               AbsoluteLayout.LayoutBounds="0.1,0.1" AbsoluteLayout.LayoutFlags="PositionProportional"/>
+        <Button Text="Add Password" Clicked="AddPassword"></Button>
+        <StackLayout AbsoluteLayout.LayoutBounds="0.5,0.4,0.9,0.6" AbsoluteLayout.LayoutFlags="All">
+            <ScrollView>
+                <Editor Placeholder="Title" AutoSize="TextChanges" 
+                    BackgroundColor="Blue" x:Name="titleEditor"/>
+            </ScrollView>
+            <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Editor BackgroundColor="Yellow" x:Name="contentEditor"/>
+            </ScrollView>
+        </StackLayout>
+        <Button Text="Save" AbsoluteLayout.LayoutBounds="0.5,0.85" 
+                AbsoluteLayout.LayoutFlags="PositionProportional" 
+                BackgroundColor="Blue" BorderRadius="20"
+                x:Name="saveBtn" Clicked="SaveBtn_Clicked"/>
+    </AbsoluteLayout>-->
+</ContentPage>

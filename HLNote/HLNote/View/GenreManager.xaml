@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HLNote.GenreManager"
+             Title="Genre Manager">
+    <StackLayout>
+    <TableView RowHeight="50">
+        <TableRoot>
+            <TableSection Title="Genre">
+                <ViewCell Height="50">
+                    <StackLayout Padding="13,0" Margin="0,2" 
+                                 Orientation="Horizontal" 
+                                 HorizontalOptions="FillAndExpand">
+                        <Entry Placeholder="New genre" x:Name="newGenre" BackgroundColor="White"
+                               ReturnType="Done" HorizontalOptions="FillAndExpand"/>
+                        <Button HorizontalOptions="End" 
+                                Image="create.png"
+                                BackgroundColor="#fcfcf8"
+                                VerticalOptions="Center"
+                                Clicked="OnAdd">
+                        </Button>
+                    </StackLayout>
+                </ViewCell>
+            </TableSection>
+        </TableRoot>
+    </TableView>
+    <ListView x:Name="genreList">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout HorizontalOptions="FillAndExpand" 
+                                 Orientation="Horizontal" BackgroundColor="#b3ffec">
+                        <Entry Text="{Binding GenreName}" HorizontalOptions="FillAndExpand"
+                                Focused="Entry_Focused" Unfocused="Entry_Unfocused"/>
+                            <Button IsVisible="False"
+                                    Image="delete.png"
+                                    HeightRequest="15"
+                                    WidthRequest="40"
+                                    Clicked="OnDelete">
+                            </Button>
+                            <Button IsVisible="False"
+                                    Image="update.png"
+                                    Clicked="OnUpdate"
+                                    HeightRequest="15"
+                                    WidthRequest="40"
+                                    BackgroundColor="White">
+                            </Button>
+                            <!--<StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnEdit" NumberOfTapsRequired="1">
+                                </TapGestureRecognizer>
+                            </StackLayout.GestureRecognizers>-->
+                        </StackLayout>
+                    <ViewCell.ContextActions>
+                        <MenuItem Text="Delete" IsDestructive="true"
+                                                  CommandParameter="{Binding .}" Clicked="DeleteItem"/>
+                    </ViewCell.ContextActions>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+    </StackLayout>
+</ContentPage>

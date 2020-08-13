@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HLNote.HomePage" Icon="logo_s.png" Title="HLNote"
+             >
+    <StackLayout>
+        <SearchBar Placeholder="Search your notes" TextChanged="SearchBar_TextChanged"/>
+        <Button Image="adds.png" Clicked="OnAdd" BorderRadius="20"
+                WidthRequest="50" HeightRequest="65" Margin="50,5,50,5" BackgroundColor="White"/>
+        <ListView x:Name="listView" SeparatorColor="Aqua"
+                  IsPullToRefreshEnabled="true" ItemSelected="ListView_ItemSelected"
+                  Refreshing="ListView_Refreshing">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell >
+                        <StackLayout BackgroundColor="{Binding NoteColor.ColorName}" Orientation="Horizontal">
+                            <StackLayout HorizontalOptions="FillAndExpand">
+                                <Label Text="{Binding Title}"/>
+                                <Label Text="{Binding Content.Content}" TextColor="Pink"/>
+                            </StackLayout>
+                            <Label Text="{Binding LastModify}" HorizontalTextAlignment="End" FontSize="Small"/>
+                            <Image  IsVisible="{Binding HasPassword}" Source="password.png" HeightRequest="20" WidthRequest="20"/>
+                        </StackLayout>
+                        <ViewCell.ContextActions>
+                            <MenuItem Icon="delete.png"
+                                      IsDestructive="True" 
+                                      CommandParameter="{Binding .}" Clicked="MenuItem_Clicked"/> 
+                        </ViewCell.ContextActions>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal" Margin="0">
+            <Image Source="hlnote.png" HorizontalOptions="Start"/>
+            <Label Text="HLNote" FontAttributes="Bold" 
+                   FontSize="Large" VerticalOptions="Center"
+                   TextColor="White" HorizontalTextAlignment="Start"></Label>
+        </StackLayout>
+    </NavigationPage.TitleView>
+</ContentPage>
